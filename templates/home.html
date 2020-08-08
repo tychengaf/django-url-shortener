@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="mt-5">Welcome to URL shortener!</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form }}
+    </div>
+    <button type="submit" class="btn btn-primary">Convert!</button>
+  </form>
+{% endblock content %}  
+

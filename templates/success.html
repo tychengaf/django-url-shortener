@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mt-5">Success!</h1>
+
+<p>You have successfully created a shortened url!</p>
+<p>from:</p>
+<p class="pl-2 text-break" >{{ target_url }}</p>
+<p>to:</p>
+<p class="pl-2" id="absolute-url">{{ request.get_host }}{% url 'shorten-hash' shorten_hash=shorten_hash %}</p>
+
+<a href="{% url 'shorten-hash' shorten_hash=shorten_hash %}" class="btn btn-primary" target="_blank">Open Link in New Tab</a>
+
+<a tabindex="0" id='clipboard-btn' class="btn btn-primary" role="button" data-clipboard-target="#absolute-url" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="Copied!">Copy to Your Clipboard</a>
+
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+
+<script>
+    $(() => $('[data-toggle="popover"]').popover())
+    $('.popover-dismiss').popover({
+        trigger: 'focus'
+    })
+    new ClipboardJS('#clipboard-btn');
+</script>
+{% endblock extra_js %}
